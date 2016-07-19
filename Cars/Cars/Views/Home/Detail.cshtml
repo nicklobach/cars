@@ -1,0 +1,151 @@
+﻿@{
+    ViewBag.Title = "Detail";
+}
+@using Bikes.Models
+@model @ProductInfo
+@section featured
+{
+    <div id="bodydetail">
+        <div class="main_infobikes">
+            <h3>@Model.maker @Model.model, @Model.price$</h3>
+        </div>
+        <div class="detail">
+            <img src="../@Model.image" class="image">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Technical character</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Type of bike</td>
+                        <td>@Model.typeBikes</td>
+                    </tr>
+                    <tr>
+                        <td>Chassis</td>
+                        <td>@Model.chassis</td>
+                    </tr>
+                    <tr>
+                        <td>Engine</td>
+                        <td>@Model.typeEngine</td>
+                    </tr>
+                    <tr>
+                        <td>Type engine</td>
+                        <td>Diesel</td>
+                    </tr>
+                    <tr>
+                        <td>Dimension engine</td>
+                        <td>@Model.vEngine cm<sup>3</sup></td>
+                    </tr>
+                    <tr>
+                        <td>Number of cylinders</td>
+                        <td>V6</td>
+                    </tr>
+                    <tr>
+                        <td>Power</td>
+                        <td>@Model.horsePower hp(@Model.power Vt) at (@Model.maxPowerKM r/pm)</td>
+                    </tr>
+                    <tr>
+                        <td>Torque</td>
+                        <td>@Model.maxKM Nm at (@Model.maxKMRevolution r/pm)</td>
+                    </tr>
+                    <tr>
+                        <td>Gear box</td>
+                        <td>Mechanics</td>
+                    </tr>
+                    <tr>
+                        <td>Number of gears</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>Drive</td>
+                        <td>full</td>
+                    </tr>
+                    <tr>
+                        <td>Environmental standard</td>
+                        <td>Euro 6</td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr />
+            <div class="meta">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div style="width: 20%; float: right; margin-left: 10px;">
+                        <buttons label="Buy" color="green" link="~/Home/Basket"></buttons>
+                    </div>
+                    <div style="width: 20%; float: right;">
+                        <buttons label="Add basket" color="green" link="~/Home/AddBasket/@Model.id"></buttons>
+                    </div>
+                }
+                else
+                {
+                    <div style="width: 20%; float: right; margin-left: 10px;">
+                    </div>
+                    <div style="width: 20%; float: right;">
+                    </div>
+                }
+                <div style="width: 50%; float: left; height: 100%;">
+                    <div style="margin-top: 15px;">
+                        <i class="icon-bookmark"></i>
+                        <a>Volvo</a>
+                    </div>
+                    <div class="marg">
+                        <i class="icon-date"></i>
+                        <a>October 30,2016</a>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="comments">
+                <h1>10 Responses</h1>
+                <ul>
+                    @for (int i = 0; i < 6; i++)
+                    {
+                        <li>
+                            <div style="height: 100px">
+                                <img class="avatar" src="http://1.gravatar.com/avatar/b263802e2004e058851acabb4111135e?s=80&d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D80&r=G">
+                                <div class="text">
+                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Aenean non ummy hendrerit mauris. Phasellus porta. Fusce suscipit varius mi. Cum sociis sere natoque penati bus et magnis dis. Lorem ipsum dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit lorem. Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris.
+                                </div>
+                            </div>
+                            <div class="nick">
+                                YlasticEars
+                            </div>
+                            <div class="meta">
+                                october 10, 2016
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="categoriesm">
+            <h1>Categories</h1>
+            <ul>
+                <li><a href="#">acura</a></li>
+                <li><a href="#">audi</a></li>
+                <li><a href="#">bmw</a></li>
+                <li><a href="#">cadilac</a></li>
+                <li><a href="#">shevrolet</a></li>
+            </ul>
+        </div>
+    </div>
+}
+@section scripts{
+    <script>
+        $(window).load(function() {
+            $("#bikes").addClass("active");
+
+            $.ajax({
+                type: "GET",
+                url: "GetCountItemBasket",
+                success: function (data) {
+                    var count = data;
+                    $("#countBasket").text(count);
+                }
+            });
+        });
+    </script>
+}
